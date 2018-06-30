@@ -1,22 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @EdnahM
-Sign out
-52
-1,089 123 jakearchibald/idb
- Code  Issues 7  Pull requests 5  Projects 0  Wiki  Insights
-idb/lib/idb.js
-e6c31ba  8 days ago
-@jakearchibald jakearchibald Avoiding uncaught promise if open throws. Fixes #59.
-@jakearchibald @nachoab @mitchellwills @filipproch
-    
-317 lines (270 sloc)  7.7 KB
 'use strict';
 
 (function() {
@@ -333,16 +314,3 @@ e6c31ba  8 days ago
     self.idb = exp;
   }
 }());
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
-Press h to open a hovercard with more details.

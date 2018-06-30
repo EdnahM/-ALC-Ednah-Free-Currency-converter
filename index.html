@@ -10,113 +10,64 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
 </head>
 <body class="Body">
-    <header class="topings"> 
-        <h2><b>CURRENCY CONVERTER</b></h2>
-    </header>
-    <form id="form">
-        <fieldset>
-           <legend>Convert your currency</legend>
-           <table align="center" id="table">
-    
-                <tbody>
-                    <tr>
-                       <td>
-                           <input id="yourAmount" placeholder="Enter amount in number" type="number" step="0.000001" class="select">
-                       </td>
-                        <td>
-                        
-                            <select id = "fromCurrency" name="fromCurrency" class="select">
-                                <option selected>Your currency</option>
-                            </select>
-                        
-                        </td>
-                    
-                    </tr>
-                    <tr>
-                        <td>
-                             <input id="toAmount" placeholder="Enter amount in number" type="number" step="0.000001" class="select">
-                        </td>
-                        <td>
-                    
-                             <select id = "toCurrency" name="toCurrency" class="select">
-                                <option selected>To what currency</option>
-                             </select>
-                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            
-                                <button type="button" id="ok" name="ok" aria-label="ok" onclick="response.json">OK</button>
-                         
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
-    </form>
-    
-    <footer class="topings">
-        <div align="center">
-           E.W.Mugoh &copy; productions ALC 2018.
+    <div class="container">
+        <div>
+            <header class="topings"> 
+              <h2><b>CURRENCY CONVERTER</b></h2>
+            </header>
         </div>
-    </footer>
-    <script type="text/javascript" src="./idb.js"> </script>
-    <script>
-            let yourAmount = document.querySelector("#yourAmount");
-            let fromCurrency = document.querySelector("#fromCurrency");
-            let toCurrency = document.querySelector("#toCurrency");
-            let ok = document.querySelector('#ok');
-      
-            let url = 'https://free.currencyconverterapi.com/api/v5/currencies';
-      
-             fetch( url,{ method : "GET"})
-                  .then( function(response){ 
-                      return response.json();
-                  })
-                  .then( function(results){
-                      for(let result in results){
-                        for(let id in results[result]){
-                            let optionA = `
-                            <option value="${results[result][id]['id']}">
-                               ${results[result][id]['currencyName']} (${results[result][id]['id']})
-                            </option>
-                            `;
-                            let optionB = `
-                            <option value="${results[result][id]['id']}">
-                               ${results[result][id]['currencyName']} (${results[result][id]['id']})
-                            </option>
-                            `;
-                           fromCurrency.innerHTML += optionA;
-                           toCurrency.innerHTML += optionB;
-                       }
-                     }
-                  })
-                  .catch( function(error){
-                      console.log(error);
-                  });
-                  
-         // convrtion done
-         ok.addEventListener("click", convertCurrency);
-      
-         function convertCurrency(){
-              let query = fromCurrency.value + '_' + toCurrency.value;
-      
-              fetch("https://free.currencyconverterapi.com/api/v5/convert?q=" + query + "&compact=ultra", {method : "GET"})
-                .then(response => response.json())
-                .then(data => {
-                 for(con in data){
-                    console.log(data[con]);
-                    output.innerHTML = `<input type="text" class="u-full-width" value="${data[con]}">`;
-                 }
-                })
-                .catch(error => console.log(error));
-      
-           console.log(fromCurrency.value);
-           console.log(toCurrency.value);
-         }
-        </script>
-    <script type="text/javascript" src="./scripts/index1.js"></script>
-    <script type="text/javascript" src="./scripts/app.js"></script>
+        <div>
+        <form id="form">
+            <fieldset>
+                <legend>Convert your currency</legend>
+                <table align="center" id="table">
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="yourAmount" placeholder="Enter amount in number" type="number" step="0.000001" class="select">
+                            </td>
+                            <td>
+                            
+                                <select id = "fromCurrency" name="fromCurrency" class="select">
+                                    <option selected>Your currency</option>
+                                </select>
+                            
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>
+                                    <input id="toAmount" placeholder="Result" type="number" class="select" readonly>
+                            </td>
+                            <td>
+                        
+                                    <select id = "toCurrency" name="toCurrency" class="select" >
+                                    <option selected>To what currency</option>
+                                    </select>
+                            
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                
+                                  <input type="submit" id="Ok" value="OK">
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            </form>
+        </div>
+        <div class="footer" align="center">
+        <footer >
+            E.W.Mugoh &copy; productions ALC 2018.
+        </footer>
+        </div>
+        </div>
+        <script type="text/javascript" src="./idb.js"></script> 
+        <script type="text/javascript" src="./scripts/application.js"></script> 
+        <script type="text/javascript" src="./scripts/index.js"></script> 
 </body>
 </html>
