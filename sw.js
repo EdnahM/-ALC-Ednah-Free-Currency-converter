@@ -1,28 +1,44 @@
-const constCacheName='free_currency_converter';
-const cacheFiles=['/','/index.html','/css/main.css','/scripts/index.js','/scripts/app.js','idb.js']
+let cache = "converter";
+let version = "1.0.0";
+let cacheName = `${cache}_${version}`;
+let filesToCache = [
+  "./", "./index.html","./manifest.json", "./css/materialize.min.css", "./js/materialize.min.js","./js/main.js","./js/idb.js","https://fonts.googleapis.com/icon?family=Material+Icons","https://code.jquery.com/jquery-2.1.1.min.js","https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css","https://free.currencyconverterapi.com/api/v5/currencies","https://use.fontawesome.com/releases/v5.1.0/css/solid.css"
+  ];
 
-self.addEventListener('install',(event) => {
-   event.waitUntil(caches.open(fileCacheName)
-   .then((cache) => cache.addAll (cacheFiles)) ) });
-self.addEventListener('activate', (event) => {
-    event.waitUntil(caches.key()
-    .then((cacheNames) => { 
-      return Promise.all(cacheNames.filter((cacheName)=> {
-      return cacheName.startWith('free_currency_converter')&& 
-      cacheName!== fileCacheName;})
-      .map(cacheName => caches.delete(cacheName)) 
-   ); 
-  })
- );
+
+
+self.addEventListener("install", event => {
+  console.log("[Service Worker] installing ");
+
+  event.waitUntil(
+    caches.open(cacheName).then(cache => {
+      console.log("[Service Worker] caching all files");
+      cache.addAll(filesToCache);
+    }).then(() => self.skipWaiting()).catch(err => console.log("error occured while caching files: ",err))
+  );
 });
-self.addEventListner('fetch', (event) => {
-   event.respondWith(caches.match(event.request).then((response) =>{ if (response) { return response;}
-    const fetchRequest = event.request.clone();
-    return fetch(fetchRequest).then((response) => { if (!response || response.status !== 200 ||responce.type !== 'OK')
-   {return response;}
-   const responceToCache = response.clone();
-   caches.open(cache_name).then((cache) => { cache.put(event.request, responseToCache); }); return response;}) 
-  }) ) } );
-self.addEventListener('message', (event) => { 
-     if (event.data.action === 'goNext') {
-     self.goNext();} });
+
+self.addEventListener("fetch", event => {
+  console.log(event.request.url)
+
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request)
+    })
+  );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keyList => {
+      Promise.all(
+        keyList.map(key => {
+          if (key !== cacheName) {
+            caches.delete(key);
+            console.log(`deleted ${key}`)
+          }
+        })
+      );
+    })
+  );
+});

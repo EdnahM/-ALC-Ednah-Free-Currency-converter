@@ -1,9 +1,18 @@
-# ALC_FreecurrencyConverter.
-# 7 day code challenge.
-This is a Progressive website application
+#7 Day ALC challenge program
 
-#Frontend application with the use of:
- service  worker:...**https://developers.google.com/web/fundamentals/primers/service-workers/**
- IndexedDB.....**https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API**
- Freecurrency converter api... **https://www.currencyconverterapi.com/**
+Javascript is written in >=ES6
+A Github repository for version control.
+Host a working version of the application on Github-Pages.
+The app make use of
+Service Worker
+Cache API
+IndexedDB
+NB:No libraries
+
+
+
+powered by the FreecurrencyconverteraPI
+API Specifications
+Base URL: https://www.currencyconverterapi.com
+Documentation: https://www.currencyconverterapi.com/docs
 

@@ -1,0 +1,9 @@
+{
+    "name": "Currency Converter",
+    "author":"Edna Mugoh",
+    "short_name": "Converter",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#1a237e",
+    "theme_color": "#1a237e"
+}
